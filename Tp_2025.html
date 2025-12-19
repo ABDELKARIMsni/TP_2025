@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Terminal Simulation</title>
+<style>
+  body {
+    background: black;
+    color: #00ff00;
+    font-family: monospace;
+    padding: 20px;
+    font-size: large;
+  }
+</style>
+</head>
+<body>
+
+<pre id="terminal"></pre>
+
+<script>
+const terminal = document.getElementById("terminal");
+
+function print(line, delay = 500) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      terminal.textContent += line + "\n";
+      resolve();
+    }, delay);
+  });
+}
+
+async function run() {
+  await print("Initializing system...");
+  await print("Loading modules...");
+  await print("Connecting...");
+  await print("");
+
+  // Safe navigator info
+  await print("Browser : " + navigator.userAgent);
+  await print("Platform : " + navigator.platform);
+  await print("Language : " + navigator.language);
+  await print("Online : " + navigator.onLine);
+  await print("Screen : " + screen.width + "x" + screen.height);
+  await print("");
+
+  // Public IP (approximate)
+  await print("Requesting public IP...");
+  try {
+    const res = await fetch("https://api.ipify.org?format=json");
+    const data = await res.json();
+    await print("Public IP : " + data.ip);
+  } catch {
+    await print("Public IP : unavailable");
+  }
+
+  await print("");
+  await print("Running simulation...");
+  await print("Processing data...");
+  await print("");
+
+  // Progress (simulation)
+  await print("Package install (demo)...46%");
+  await print("Package install (demo)...60%");
+  await print("Package install (demo)...80%");
+  await print("Package install (demo)...100%");
+  await print("");
+
+  await print("Connection status : simulated");
+  await print("Result : Fake demo only");
+  await print("virus installed.........");
+  await print("connection made");
+}
+
+run();
+</script>
+
+</body>
+</html>
